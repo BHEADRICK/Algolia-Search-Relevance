@@ -35,7 +35,7 @@ class ASR_Rules {
 
 	public function check_hits(){
 
-	    $products = wc_get_products();
+	    
 
     }
 
@@ -56,13 +56,13 @@ class ASR_Rules {
         array_unshift( $settings['attributesToIndex'], 'ordered(post_title');
 
 
-//        error_log(print_r($settings, true));
+
 
         return $settings;
     }
 
     public function attributes( array $attributes, WP_Post $post ) {
-//	$product = wc_get_product( $post );
+
 
         if(in_array($post->post_type, ['product', 'product_variation'])){
 
@@ -72,7 +72,7 @@ class ASR_Rules {
 	unset($attributes['post_author']);
 }
 
-        error_log(print_r($attributes, true));
+
 	return $attributes;
 	}
 
