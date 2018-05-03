@@ -76,7 +76,7 @@ class ASR_Rules {
 
 
         if(in_array($post->post_type, ['product', 'product_variation'])){
-    error_log(print_r($attributes, true));
+
             $attributes['post_parent'] = $post->post_parent;
 
 	unset($attributes['post_excerpt']);
