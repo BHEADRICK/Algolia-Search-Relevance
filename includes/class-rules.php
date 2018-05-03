@@ -48,6 +48,17 @@ class ASR_Rules {
 
             array_unshift($settings['customRanking'], 'desc(price)');
 
+            foreach($settings['attributesToIndex'] as $ix=> $item){
+                if(strpos($item, 'content') !== false){
+                    unset($settings['attributesToIndex'][$ix]);
+                }
+            }
+
+            foreach($settings['attributesToSnippet'] as $ix=>$item){
+                if(strpos($item, 'content') !== false){
+                    unset($settings['attributesToSnippet'][$ix]);
+                }
+            }
 
         }
         if($post_type == ' product_variation'){
@@ -56,7 +67,7 @@ class ASR_Rules {
         array_unshift( $settings['attributesToIndex'], 'ordered(post_title');
 
 
-
+        error_log(print_r($settings, true));
 
         return $settings;
     }
@@ -65,7 +76,7 @@ class ASR_Rules {
 
 
         if(in_array($post->post_type, ['product', 'product_variation'])){
-
+    error_log(print_r($attributes, true));
             $attributes['post_parent'] = $post->post_parent;
 
 	unset($attributes['post_excerpt']);
@@ -114,6 +125,6 @@ class ASR_Rules {
 
             add_filter('algolia_posts_index_settings', [$this, 'index_settings'], 99, 2);
             add_filter('algolia_post_product_shared_attributes', [$this, 'attributes'], 99, 2);
-            add_filter('algolia_should_index_post', [$this ,'indexable'], 11, 2);
+            add_filter('algolia_should_index_post', [$this ,'indexable'], 99, 2);
 	}
 }
